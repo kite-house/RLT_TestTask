@@ -16,7 +16,7 @@ print('Telegram-bot: launched!')
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer("Прив")
+    await message.answer(f"Hi, {message.from_user.full_name}!")
 
 @dp.message()
 async def get_dataset(message: types.Message):
