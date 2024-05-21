@@ -1,9 +1,9 @@
 import unittest
-from agrigation import Agragation
+from agrigation import Agrigation
 
 class TestAgrigation(unittest.TestCase):
     def testHour(self):
-        self.assertEqual(Agragation({
+        self.assertEqual(Agrigation({
             "dt_from": "2022-02-01T00:00:00",
             "dt_upto": "2022-02-02T00:00:00",
             "group_type": "hour"}).dataset(), # <- ВХОДНЫЕ ДАННЫЕ
@@ -20,7 +20,7 @@ class TestAgrigation(unittest.TestCase):
            "2022-02-02T00:00:00"]}))
 
     def testDay(self):
-        self.assertEqual(Agragation({
+        self.assertEqual(Agrigation({
             "dt_from": "2022-10-01T00:00:00",
             "dt_upto": "2022-11-30T23:59:00",
             "group_type": "day"}).dataset(),  # <- ВХОДНЫЕ ДАННЫЕ
@@ -49,7 +49,7 @@ class TestAgrigation(unittest.TestCase):
            "2022-11-30T00:00:00"]}))
 
     def testMonth(self):
-        self.assertEqual(Agragation({
+        self.assertEqual(Agrigation({
             "dt_from": "2022-09-01T00:00:00",
             "dt_upto": "2022-12-31T23:59:00",
             "group_type": "month"}).dataset(),  # <- ВХОДНЫЕ ДАННЫЕ
@@ -59,5 +59,7 @@ class TestAgrigation(unittest.TestCase):
             "labels": ["2022-09-01T00:00:00", "2022-10-01T00:00:00", "2022-11-01T00:00:00", "2022-12-01T00:00:00"]}))
 
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
+
 
