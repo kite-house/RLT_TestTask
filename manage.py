@@ -2,14 +2,14 @@
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
-import os
+from os import environ
 from agrigation import Agrigation
 import tests
 import unittest
 
 unittest.TextTestRunner(verbosity=2).run(unittest.TestLoader().loadTestsFromModule(tests))
 
-bot = Bot(token=os.environ.get('TELEGRAM_ACCESS_TOKEN'))
+bot = Bot(token=environ.get('TELEGRAM_ACCESS_TOKEN'))
 dp = Dispatcher()
 
 print('Telegram-bot: launched!')
@@ -31,6 +31,7 @@ async def get_dataset(message: types.Message):
 
         else:
             raise Exception('not valid keys')
+        
     except Exception:
         await message.answer('Невалидный запос. Пример запроса: {"dt_from": "2022-09-01T00:00:00", "dt_upto": "2022-12-31T23:59:00", "group_type": "month"}')
 
