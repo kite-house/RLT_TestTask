@@ -22,19 +22,20 @@ class Agragation:
         elif self.group_type == 'hour':
             return {hour: list(group) for hour, group in groupby(data, key=lambda x: f"{x['dt'].year}-{x['dt'].month}-{x['dt'].day}-{x['dt'].hour}")}, '%Y-%m-%dT%H:00:00'
     
-
     def filter(self):
         ''' Из всех обьектов фильтруем те которые подходят по данному диапозону времени '''
         data = [i for i in self.data if self.dt_from <= i['dt'] <= self.dt_upto]
         return data
 
+    def dataset(self):
+        '''Создание готового датасета'''
+        groupData, formatTime = self.group()
+        for time in groupData: # Получаем группы по времени(ключи от словаря)
+            value = 0
+            for data in groupData[time]: # получаем данные в этой группе
+                value += data['value']
 
+            self.resultData['labels'].append(datetime.strftime(groupData[time][0]['dt'], formatTime))
+            self.resultData['dataset'].append(value)
 
-group, formatTimeGroup = Agragation({
-            "dt_from": "2022-09-01T00:00:00",
-            "dt_upto": "2022-12-31T23:59:00",
-            "group_type": "month"
-            }).group()
-
-for i in group:
-    print(i)
+        return str(self.resultData) # исправить ошибку с пропусками
