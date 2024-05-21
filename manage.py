@@ -25,6 +25,12 @@ async def get_dataset(message: types.Message):
         if list(request.keys()) == ['dt_from', 'dt_upto', 'group_type']:
             if list(request.values()) != ['', '', '']:
                 await message.answer(Agrigation(request).dataset())
+            
+            else:
+                raise Exception('not valid values')
+
+        else:
+            raise Exception('not valid keys')
     except Exception:
         await message.answer('Невалидный запос. Пример запроса: {"dt_from": "2022-09-01T00:00:00", "dt_upto": "2022-12-31T23:59:00", "group_type": "month"}')
 
